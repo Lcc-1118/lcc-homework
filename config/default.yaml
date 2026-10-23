@@ -1,0 +1,20 @@
+# warehouse-coop 默认配置（非机密）
+node: review            # 取消拦截核验节点：review / load
+sync_delay_min: 12      # 取消事件同步延迟（证据 f31）
+update_freq: twice_day  # 数据更新频率：每天两次（证据 f34）
+stale_period: 12h       # 超过该周期标「待刷新」，不作实时承诺（f34）
+
+# 口径（REQ-3）
+metrics:
+  denominator: ship_orders      # 分母：出库/装车笔数
+  exclude_rules:
+    - 取消订单不计入错发分母
+  period: trial                 # 统计周期：整段试点
+  reporter: ""                  # 出数人（待确认）
+  confirmed: false              # 口径是否已书面固定（f42）
+
+# 边界（不做什么）
+boundaries:
+  auto_operate_forklift: false  # 不自动操作叉车（f05、f52）
+  auto_inventory: false         # 不做盘盈盘亏（f52）
+  write_business_system: false  # 不写入业务系统（f32、f41）

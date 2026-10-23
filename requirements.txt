@@ -1,0 +1,6 @@
+# warehouse-coop 依赖清单
+# 运行时零第三方依赖（标准库即可运行）
+# 以下仅为开发/测试可选依赖
+
+# 测试运行器（可选，无 pytest 时用标准库 unittest）
+pytest>=7.0 ; extra == "dev"

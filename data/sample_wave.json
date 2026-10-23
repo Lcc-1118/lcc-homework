@@ -1,0 +1,34 @@
+{
+  "wave": {
+    "wave_no": "WAVE-20261023-042",
+    "orders": [
+      "ORD-8801",
+      "ORD-8802",
+      "ORD-8803",
+      "ORD-8804"
+    ]
+  },
+  "cancel_events": [
+    {"order_no": "ORD-8802", "cancelled_at": "2026-10-23T08:40:00", "source": "OMS"},
+    {"order_no": "ORD-8803", "cancelled_at": "2026-10-23T08:52:00", "source": "OMS"}
+  ],
+  "sku_adjacency": {
+    "SKU-A500": ["SKU-A500L"],
+    "SKU-A500L": ["SKU-A500"],
+    "SKU-B300": ["SKU-B301"],
+    "SKU-B301": ["SKU-B300"]
+  },
+  "records": [
+    {"id": "R1", "version": "v2", "scan_at": "2026-10-23T09:00:00"},
+    {"id": "R2", "version": "v2", "scan_at": "2026-10-23T09:02:00"},
+    {"id": "R3", "scan_at": "2026-10-23T09:05:00"},
+    {"id": "R4", "version": "v2"}
+  ],
+  "metrics": {
+    "denominator": "ship_orders",
+    "exclude_rules": ["取消订单不计入错发分母"],
+    "period": "trial",
+    "reporter": "",
+    "confirmed": false
+  }
+}
