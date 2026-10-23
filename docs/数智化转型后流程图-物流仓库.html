@@ -1,0 +1,127 @@
+<html style="margin:0;padding:0;">
+<title>数智化转型后流程图 · 仓内拣选与装车核验</title>
+<div style="width:100%;box-sizing:border-box;background:#f4f6f8;padding:20px;font-family:'Microsoft YaHei','PingFang SC',system-ui,sans-serif;color:#1a2433;line-height:1.4;">
+
+  <div style="max-width:920px;margin:0 auto;">
+    <div style="font-size:22px;font-weight:700;color:#0f2a4a;margin-bottom:2px;">数智化转型后 · 仓内拣选与装车核验流程</div>
+    <div style="font-size:13px;color:#5a6b82;margin-bottom:12px;">远川物流 · FDE 训练项目 · 协同助手介入后的目标流程（示意）</div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:14px;margin-bottom:12px;font-size:12px;color:#33445c;">
+      <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:18px;height:10px;border-radius:3px;background:#ddeaf8;border:1px solid #6f9fd0;display:inline-block;"></span>处理步骤</span>
+      <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:14px;height:14px;transform:rotate(45deg);background:#fff3e0;border:1px solid #e0953f;display:inline-block;"></span>判断决策</span>
+      <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:20px;height:10px;border-radius:5px;background:#eef6ec;border:1px solid #6ba368;display:inline-block;"></span>开始/结束</span>
+      <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:18px;height:10px;background:#e9f4ff;border:1px solid #2f9ee0;display:inline-block;border-radius:2px;"></span>协同助手(数智化)</span>
+      <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:12px;height:12px;border-radius:3px;background:#fdeaea;border:1px solid #d2696a;display:inline-block;"></span>转人工兜底</span>
+    </div>
+
+    <svg viewBox="0 0 860 1060" width="100%" xmlns="http://www.w3.org/2000/svg" style="display:block;background:#fff;border:1px solid #d4dde8;border-radius:10px;">
+      <defs>
+        <marker id="a" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#4a5a70"/></marker>
+        <marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#c0504d"/></marker>
+      </defs>
+
+      <!-- 开始 -->
+      <ellipse cx="260" cy="42" rx="100" ry="26" fill="#eef6ec" stroke="#6ba368" stroke-width="1.5"/>
+      <text x="260" y="46" font-size="13" font-weight="700" fill="#2f6e46" text-anchor="middle">开始 · 订单归集</text>
+
+      <!-- 波次分配 -->
+      <line x1="260" y1="68" x2="260" y2="88" stroke="#4a5a70" stroke-width="1.5" marker-end="url(#a)"/>
+      <rect x="170" y="90" width="180" height="46" rx="6" fill="#ddeaf8" stroke="#6f9fd0" stroke-width="1.5"/>
+      <text x="260" y="110" font-size="13" font-weight="700" fill="#123c63" text-anchor="middle">波次分配</text>
+      <text x="260" y="126" font-size="11" fill="#3a5a80" text-anchor="middle">唐映秋（波次计划员）</text>
+
+      <!-- 协同：数据校验 -->
+      <line x1="260" y1="136" x2="260" y2="150" stroke="#4a5a70" stroke-width="1.5" marker-end="url(#a)"/>
+      <rect x="170" y="152" width="180" height="46" rx="6" fill="#e9f4ff" stroke="#2f9ee0" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <text x="260" y="172" font-size="12" font-weight="700" fill="#0a5a94" text-anchor="middle">🤖 数据口径校验 REQ-5</text>
+      <text x="260" y="188" font-size="10" fill="#2a6ba8" text-anchor="middle">版本/时间校验，歧义进修复队列</text>
+
+      <!-- 协同：取消拦截 -->
+      <line x1="260" y1="198" x2="260" y2="212" stroke="#4a5a70" stroke-width="1.5" marker-end="url(#a)"/>
+      <rect x="170" y="214" width="180" height="46" rx="6" fill="#e9f4ff" stroke="#2f9ee0" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <text x="260" y="234" font-size="12" font-weight="700" fill="#0a5a94" text-anchor="middle">🤖 取消订单拦截 REQ-1</text>
+      <text x="260" y="250" font-size="10" fill="#2a6ba8" text-anchor="middle">波次内检出取消单，自动拦截</text>
+
+      <!-- 菱形：取消单? -->
+      <line x1="260" y1="260" x2="260" y2="278" stroke="#4a5a70" stroke-width="1.5" marker-end="url(#a)"/>
+      <polygon points="260,278 380,328 260,378 140,328" fill="#fff3e0" stroke="#e0953f" stroke-width="1.5"/>
+      <text x="260" y="323" font-size="12" font-weight="700" fill="#8a5a15" text-anchor="middle">含取消单?</text>
+      <text x="260" y="338" font-size="10" fill="#8a5a15" text-anchor="middle">REQ-1</text>
+
+      <!-- 是 → 转人工 -->
+      <line x1="380" y1="328" x2="560" y2="328" stroke="#c0504d" stroke-width="1.5" marker-end="url(#ar)"/>
+      <text x="470" y="321" font-size="11" fill="#c0504d" text-anchor="middle">是</text>
+      <ellipse cx="600" cy="328" rx="90" ry="24" fill="#fdeaea" stroke="#d2696a" stroke-width="1.5"/>
+      <text x="600" y="333" font-size="12" font-weight="700" fill="#8a2f2f" text-anchor="middle">转人工·波次计划员核对</text>
+
+      <!-- 否 → 拣选 -->
+      <line x1="260" y1="378" x2="260" y2="408" stroke="#4a5a70" stroke-width="1.5" marker-end="url(#a)"/>
+      <text x="282" y="396" font-size="11" fill="#4a5a70">否</text>
+      <rect x="170" y="410" width="180" height="46" rx="6" fill="#ddeaf8" stroke="#6f9fd0" stroke-width="1.5"/>
+      <text x="260" y="430" font-size="13" font-weight="700" fill="#123c63" text-anchor="middle">拣选</text>
+      <text x="260" y="446" font-size="11" fill="#3a5a80" text-anchor="middle">林亦舟（拣货员）</text>
+
+      <!-- 协同：错配提醒 -->
+      <line x1="260" y1="456" x2="260" y2="470" stroke="#4a5a70" stroke-width="1.5" marker-end="url(#a)"/>
+      <rect x="170" y="472" width="180" height="46" rx="6" fill="#e9f4ff" stroke="#2f9ee0" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <text x="260" y="492" font-size="12" font-weight="700" fill="#0a5a94" text-anchor="middle">🤖 相似SKU错配提醒 REQ-2</text>
+      <text x="260" y="508" font-size="10" fill="#2a6ba8" text-anchor="middle">扫码解释+提醒，不自动操作叉车</text>
+
+      <!-- 菱形：相似SKU? -->
+      <line x1="260" y1="518" x2="260" y2="536" stroke="#4a5a70" stroke-width="1.5" marker-end="url(#a)"/>
+      <polygon points="260,536 380,586 260,636 140,586" fill="#fff3e0" stroke="#e0953f" stroke-width="1.5"/>
+      <text x="260" y="581" font-size="11" font-weight="700" fill="#8a5a15" text-anchor="middle">相似SKU</text>
+      <text x="260" y="596" font-size="11" font-weight="700" fill="#8a5a15" text-anchor="middle">相邻?</text>
+
+      <!-- 是 → 人工确认 -->
+      <line x1="380" y1="586" x2="560" y2="586" stroke="#c0504d" stroke-width="1.5" marker-end="url(#ar)"/>
+      <text x="470" y="579" font-size="11" fill="#c0504d" text-anchor="middle">是</text>
+      <ellipse cx="600" cy="586" rx="80" ry="22" fill="#fdeaea" stroke="#d2696a" stroke-width="1.5"/>
+      <text x="600" y="591" font-size="12" font-weight="700" fill="#8a2f2f" text-anchor="middle">人工确认规格</text>
+
+      <!-- 否 → 复核 -->
+      <line x1="260" y1="636" x2="260" y2="666" stroke="#4a5a70" stroke-width="1.5" marker-end="url(#a)"/>
+      <text x="282" y="654" font-size="11" fill="#4a5a70">否</text>
+      <rect x="170" y="668" width="180" height="46" rx="6" fill="#ddeaf8" stroke="#6f9fd0" stroke-width="1.5"/>
+      <text x="260" y="688" font-size="13" font-weight="700" fill="#123c63" text-anchor="middle">复核（数智辅助）</text>
+      <text x="260" y="704" font-size="11" fill="#3a5a80" text-anchor="middle">目标 35→20 分钟 · 自动比对</text>
+
+      <!-- 协同：复核辅助/漏扫 -->
+      <line x1="260" y1="714" x2="260" y2="728" stroke="#4a5a70" stroke-width="1.5" marker-end="url(#a)"/>
+      <rect x="170" y="730" width="180" height="46" rx="6" fill="#e9f4ff" stroke="#2f9ee0" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <text x="260" y="750" font-size="12" font-weight="700" fill="#0a5a94" text-anchor="middle">🤖 复核漏扫自动核查</text>
+      <text x="260" y="766" font-size="10" fill="#2a6ba8" text-anchor="middle">漏扫=0 为硬门槛（f42）</text>
+
+      <!-- 菱形：复核通过 -->
+      <line x1="260" y1="776" x2="260" y2="794" stroke="#4a5a70" stroke-width="1.5" marker-end="url(#a)"/>
+      <polygon points="260,794 380,844 260,894 140,844" fill="#fff3e0" stroke="#e0953f" stroke-width="1.5"/>
+      <text x="260" y="839" font-size="12" font-weight="700" fill="#8a5a15" text-anchor="middle">复核通过?</text>
+      <text x="260" y="854" font-size="10" fill="#8a5a15" text-anchor="middle">漏扫=0</text>
+
+      <!-- 否 → 返工 -->
+      <line x1="140" y1="844" x2="60" y2="844" stroke="#c0504d" stroke-width="1.5" marker-end="url(#ar)"/>
+      <text x="104" y="837" font-size="11" fill="#c0504d" text-anchor="middle">否</text>
+      <ellipse cx="40" cy="884" rx="70" ry="22" fill="#fdeaea" stroke="#d2696a" stroke-width="1.5"/>
+      <text x="40" y="889" font-size="12" font-weight="700" fill="#8a2f2f" text-anchor="middle">返工修正</text>
+
+      <!-- 是 → 集货 -->
+      <line x1="260" y1="894" x2="260" y2="922" stroke="#4a5a70" stroke-width="1.5" marker-end="url(#a)"/>
+      <text x="282" y="912" font-size="11" fill="#4a5a70">是</text>
+      <rect x="170" y="924" width="180" height="46" rx="6" fill="#ddeaf8" stroke="#6f9fd0" stroke-width="1.5"/>
+      <text x="260" y="944" font-size="13" font-weight="700" fill="#123c63" text-anchor="middle">集货</text>
+      <text x="260" y="960" font-size="11" fill="#3a5a80" text-anchor="middle">装车员</text>
+
+      <!-- 结束 -->
+      <line x1="260" y1="970" x2="260" y2="992" stroke="#4a5a70" stroke-width="1.5" marker-end="url(#a)"/>
+      <ellipse cx="260" cy="1018" rx="110" ry="26" fill="#eef6ec" stroke="#6ba368" stroke-width="1.5"/>
+      <text x="260" y="1013" font-size="13" font-weight="700" fill="#2f6e46" text-anchor="middle">配送站收货 · 结束</text>
+      <text x="260" y="1029" font-size="10" fill="#4a7a57" text-anchor="middle">🤖 审计留痕 REQ-4 · 口径核算 REQ-3 全程记录</text>
+    </svg>
+
+    <div style="font-size:12px;color:#5a6b82;border-top:1px solid #d4dde8;margin-top:12px;padding-top:8px;">
+      <b>转型要点：</b>数据校验(REQ-5)→取消拦截(REQ-1)→错配提醒(REQ-2)→复核漏扫自动核查→审计留痕(REQ-4)+口径核算(REQ-3)嵌入主流程；
+      交接清单(REQ-6)覆盖跨岗交接。取消单/错配/漏扫异常均转人工兜底（f44），不自动操作、不写业务系统（f05、f32、f41、f52）。示意流程，真实接口需另行核实。
+    </div>
+  </div>
+</div>
+</html>

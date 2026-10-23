@@ -1,0 +1,93 @@
+<html style="margin:0;padding:0;">
+<title>设计方案 · 仓内拣选与装车核验数智化协同助手</title>
+<div style="width:100%;box-sizing:border-box;background:#f4f6f8;padding:24px;font-family:'Microsoft YaHei','PingFang SC',system-ui,sans-serif;color:#1f2a37;line-height:1.6;">
+
+  <div style="max-width:920px;margin:0 auto;">
+    <div style="font-size:23px;font-weight:700;color:#0f2a4a;margin-bottom:2px;">设计方案 · 仓内拣选与装车核验数智化协同助手</div>
+    <div style="font-size:13px;color:#5a6b82;margin-bottom:16px;">远川物流 · FDE 训练项目 · 版本 v0.1 · 2026-10-23</div>
+    <div style="height:3px;background:linear-gradient(90deg,#0f2a4a,#2f6ea3);border-radius:2px;margin-bottom:18px;"></div>
+
+    <!-- 1 背景与目标 -->
+    <div style="font-size:16px;font-weight:700;color:#0f2a4a;margin:16px 0 8px;">1 · 背景与目标</div>
+    <div style="background:#fff;border:1px solid #dbe3ec;border-radius:8px;padding:14px 18px;">
+      <div style="font-size:13px;font-weight:700;color:#123c63;margin-bottom:6px;">业务痛点（证据）</div>
+      <ul style="font-size:13px;color:#3a4f68;margin:0;padding-left:20px;">
+        <li>取消订单已进波次、拣完仍被装车、到站才发现（f11、f44、f31）</li>
+        <li>相似包装 SKU 相邻货位，新员工常拿错规格（f10、f14、f52）</li>
+        <li>复核每日 7000 行，人工重复复核约 14 人时，耗时 35 分钟（f12、f00）</li>
+        <li>错发率 1.8%、漏扫核查依赖人工，验收口径未书面固定（f00、f42）</li>
+      </ul>
+      <div style="font-size:13px;font-weight:700;color:#123c63;margin-top:10px;margin-bottom:6px;">转型目标</div>
+      <ul style="font-size:13px;color:#3a4f68;margin:0;padding-left:20px;">
+        <li>错发率 1.8% → 0.5%；复核 35 → 20 分钟；漏扫为零（硬门槛）</li>
+        <li>取消单、错配在装车前被拦截，异常一律转人工兜底</li>
+      </ul>
+    </div>
+
+    <!-- 2 需求映射 -->
+    <div style="font-size:16px;font-weight:700;color:#0f2a4a;margin:16px 0 8px;">2 · 需求映射（REQ → 证据 → 协同助手模块）</div>
+    <div style="background:#fff;border:1px solid #dbe3ec;border-radius:8px;overflow:hidden;">
+      <table style="width:100%;border-collapse:collapse;font-size:13px;">
+        <thead><tr style="background:#0f2a4a;color:#fff;">
+          <th style="padding:9px 12px;text-align:left;">需求</th><th style="padding:9px 12px;text-align:left;">证据</th><th style="padding:9px 12px;text-align:left;">协同助手模块</th>
+        </tr></thead>
+        <tbody>
+          <tr><td style="padding:8px 12px;border-bottom:1px solid #edf1f6;">REQ-1 取消拦截</td><td style="padding:8px 12px;border-bottom:1px solid #edf1f6;">f11、f44、f31</td><td style="padding:8px 12px;border-bottom:1px solid #edf1f6;">cancel_interceptor（BLOCK + 转人工）</td></tr>
+          <tr><td style="padding:8px 12px;border-bottom:1px solid #edf1f6;">REQ-2 错配提醒</td><td style="padding:8px 12px;border-bottom:1px solid #edf1f6;">f10、f14、f52</td><td style="padding:8px 12px;border-bottom:1px solid #edf1f6;">mismatch_reminder（扫码解释+提醒）</td></tr>
+          <tr><td style="padding:8px 12px;border-bottom:1px solid #edf1f6;">REQ-3 口径核算</td><td style="padding:8px 12px;border-bottom:1px solid #edf1f6;">f00、f42、f53</td><td style="padding:8px 12px;border-bottom:1px solid #edf1f6;">metrics（错发率/漏扫核算）</td></tr>
+          <tr><td style="padding:8px 12px;border-bottom:1px solid #edf1f6;">REQ-4 审计留痕</td><td style="padding:8px 12px;border-bottom:1px solid #edf1f6;">f41、f22、f45</td><td style="padding:8px 12px;border-bottom:1px solid #edf1f6;">audit（建议+人工改动+签核）</td></tr>
+          <tr><td style="padding:8px 12px;border-bottom:1px solid #edf1f6;">REQ-5 数据校验</td><td style="padding:8px 12px;border-bottom:1px solid #edf1f6;">f30~f35、f33</td><td style="padding:8px 12px;border-bottom:1px solid #edf1f6;">validation（版本/时间校验+修复队列）</td></tr>
+          <tr><td style="padding:8px 12px;border-bottom:1px solid #edf1f6;">REQ-6 交接清单</td><td style="padding:8px 12px;border-bottom:1px solid #edf1f6;">f23、f25、f54、f55</td><td style="padding:8px 12px;border-bottom:1px solid #edf1f6;">handover（编号/版本/接手人/确认）</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 3 技术架构 -->
+    <div style="font-size:16px;font-weight:700;color:#0f2a4a;margin:16px 0 8px;">3 · 技术架构</div>
+    <div style="background:#fff;border:1px solid #dbe3ec;border-radius:8px;padding:14px 18px;">
+      <div style="font-size:13px;color:#3a4f68;">纯 Python 3.10+ 标准库实现，CLI 三子命令（<code>run / verify / metrics</code>）；分层：</div>
+      <ul style="font-size:13px;color:#3a4f68;margin:8px 0 0;padding-left:20px;">
+        <li><b>入口层</b>：main.py / __main__.py（argparse CLI，支持 python -m）</li>
+        <li><b>核心层 core/</b>：cancel_interceptor、mismatch_reminder、metrics、handover、pipeline（协同编排）</li>
+        <li><b>工具层 utils/</b>：validation（数据校验）、snapshot（故障快照去重）、audit（审计留痕）</li>
+        <li><b>数据层</b>：data/sample_wave.json（波次样本）、config/default.yaml（默认参数）</li>
+        <li><b>测试</b>：tests/test_core.py（11 项 unittest）</li>
+      </ul>
+      <div style="font-size:12px;color:#5a6b82;margin-top:10px;">关键设计：<b>只提示 + 人工确认，不自动放行、不写业务系统</b>；异常路径统一转人工，审计可重建处理链。</div>
+    </div>
+
+    <!-- 4 流程设计 -->
+    <div style="font-size:16px;font-weight:700;color:#0f2a4a;margin:16px 0 8px;">4 · 流程设计</div>
+    <div style="background:#fff;border:1px solid #dbe3ec;border-radius:8px;padding:14px 18px;">
+      <div style="font-size:13px;color:#3a4f68;">
+        协同助手嵌入主流程：<b>数据校验(REQ-5) → 取消拦截(REQ-1) → 错配提醒(REQ-2) → 复核漏扫核查 → 交接清单(REQ-6) → 审计留痕(REQ-4) + 口径核算(REQ-3)</b>。
+        每个判断点（含取消单 / 相似SKU / 复核通过）均为「是→放行、否→转人工或返工」的确定性分支，人工确认后才继续。
+      </div>
+    </div>
+
+    <!-- 5 安全边界 -->
+    <div style="font-size:16px;font-weight:700;color:#0f2a4a;margin:16px 0 8px;">5 · 安全边界与验收</div>
+    <div style="display:flex;flex-wrap:wrap;gap:16px;">
+      <div style="flex:1 1 320px;background:#fff;border:1px solid #dbe3ec;border-radius:8px;padding:14px 18px;">
+        <div style="font-size:13px;font-weight:700;color:#8a2f2f;margin-bottom:6px;">边界（不做什么）</div>
+        <ul style="font-size:13px;color:#3a4f68;margin:0;padding-left:20px;">
+          <li>不自动操作叉车、不做盘盈盘亏（f05、f52）</li>
+          <li>不写入业务系统、不自动批准（f32、f41）</li>
+          <li>取消单/缺依据/版本冲突/系统不可用 → 转人工（f44）</li>
+          <li>不代替安全主管专业签核（f22）；高危操作遵现场规程（f40）</li>
+        </ul>
+      </div>
+      <div style="flex:1 1 320px;background:#fff;border:1px solid #dbe3ec;border-radius:8px;padding:14px 18px;">
+        <div style="font-size:13px;font-weight:700;color:#1f5a24;margin-bottom:6px;">验收标准</div>
+        <ul style="font-size:13px;color:#3a4f68;margin:0;padding-left:20px;">
+          <li>错发率 ≤ 0.5%（基线 1.8%）</li>
+          <li>复核 ≤ 20 分钟（基线 35 分钟）</li>
+          <li>漏扫为零（硬门槛）</li>
+          <li>口径未书面固定前验收不可签字（f42）</li>
+          <li>安全主管可否决上线，配送站长参与验收（f02、f04）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</html>
