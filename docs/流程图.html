@@ -1,0 +1,131 @@
+<html style="margin:0;padding:0;">
+<title>仓内拣选与装车核验 · 全流程与协同助手介入图</title>
+<div style="width:100%;box-sizing:border-box;background:#f6f7f9;padding:24px 20px;font-family:'Microsoft YaHei','PingFang SC',system-ui,sans-serif;color:#1a2433;line-height:1.5;">
+
+  <!-- 标题 -->
+  <div style="max-width:1100px;margin:0 auto;">
+    <div style="font-size:24px;font-weight:700;color:#123c63;margin-bottom:4px;">仓内拣选与装车核验 · 全流程与协同助手介入</div>
+    <div style="font-size:13px;color:#5a6b82;margin-bottom:18px;">远川物流 · FDE 项目 · 证据基线 f00~f55 · 合成业务场景（示意）</div>
+
+    <!-- 图例 -->
+    <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:16px;font-size:12px;color:#33445c;">
+      <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:12px;height:12px;border-radius:3px;background:#e3edf9;border:1px solid #7aa7d3;display:inline-block;"></span>主流程步骤</span>
+      <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:12px;height:12px;border-radius:3px;background:#fff3e0;border:1px solid #e0953f;display:inline-block;"></span>协同助手介入点（P0）</span>
+      <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:12px;height:12px;border-radius:3px;background:#fdeaea;border:1px solid #d2696a;display:inline-block;"></span>已知异常 / 返工点</span>
+      <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:12px;height:12px;border-radius:3px;background:#eef6ec;border:1px solid #6ba368;display:inline-block;"></span>人工确认 / 审计兜底</span>
+    </div>
+
+    <!-- 主流程（左） + 能力（右） -->
+    <div style="display:flex;flex-wrap:wrap;gap:24px;">
+
+      <!-- 左：主流程链 -->
+      <div style="flex:1 1 400px;min-width:300px;">
+
+        <!-- 步骤卡片 -->
+        <div id="step1" style="background:#e3edf9;border:1px solid #7aa7d3;border-radius:8px;padding:10px 14px;">
+          <div style="font-size:13px;font-weight:700;color:#123c63;">1 · 订单归集</div>
+          <div style="font-size:12px;color:#33506f;">责任人：顾明岚（仓储经理）</div>
+          <div style="font-size:12px;color:#5a6b82;">输入：OMS 订单</div>
+        </div>
+        <div style="text-align:center;color:#7aa7d3;line-height:1;margin:4px 0;">▼</div>
+
+        <div id="step2" style="background:#fff3e0;border:1px solid #e0953f;border-radius:8px;padding:10px 14px;">
+          <div style="font-size:13px;font-weight:700;color:#8a5a15;">2 · 波次分配 <span style="font-size:11px;font-weight:400;background:#e0953f;color:#fff;border-radius:10px;padding:1px 8px;margin-left:4px;">P0 介入</span></div>
+          <div style="font-size:12px;color:#7a5a22;">责任人：唐映秋（波次计划员）</div>
+          <div style="font-size:12px;color:#b0762f;">异常：取消单仍入波次（f11、f31，同步延迟约12分钟）</div>
+        </div>
+        <div style="text-align:center;color:#7aa7d3;line-height:1;margin:4px 0;">▼</div>
+
+        <div id="step3" style="background:#fff3e0;border:1px solid #e0953f;border-radius:8px;padding:10px 14px;">
+          <div style="font-size:13px;font-weight:700;color:#8a5a15;">3 · 拣选 <span style="font-size:11px;font-weight:400;background:#e0953f;color:#fff;border-radius:10px;padding:1px 8px;margin-left:4px;">P0 介入</span></div>
+          <div style="font-size:12px;color:#7a5a22;">责任人：林亦舟（拣货员）</div>
+          <div style="font-size:12px;color:#b0762f;">异常：相似包装相邻货位，常拿错规格（f10）；关键说明未随单据交接（f14）</div>
+          <div style="font-size:12px;color:#2f6e46;background:#eef6ec;border-radius:4px;padding:2px 6px;margin-top:6px;">介入：扫码解释 + 错配提醒（REQ-2，f52 不自动操作叉车）</div>
+        </div>
+        <div style="text-align:center;color:#7aa7d3;line-height:1;margin:4px 0;">▼</div>
+
+        <div id="step4" style="background:#e3edf9;border:1px solid #7aa7d3;border-radius:8px;padding:10px 14px;">
+          <div style="font-size:13px;font-weight:700;color:#123c63;">4 · 复核</div>
+          <div style="font-size:12px;color:#33506f;">责任人：林亦舟（拣货员）</div>
+          <div style="font-size:12px;color:#8a4c2f;">压力：每日7000行，人工重复复核约14人时（f12）</div>
+          <div style="font-size:12px;color:#5a6b82;">目标：复核35分钟 → 20分钟（f00）</div>
+        </div>
+        <div style="text-align:center;color:#7aa7d3;line-height:1;margin:4px 0;">▼</div>
+
+        <div id="step5" style="background:#e3edf9;border:1px solid #7aa7d3;border-radius:8px;padding:10px 14px;">
+          <div style="font-size:13px;font-weight:700;color:#123c63;">5 · 集货</div>
+          <div style="font-size:12px;color:#33506f;">责任人：装车员</div>
+        </div>
+        <div style="text-align:center;color:#7aa7d3;line-height:1;margin:4px 0;">▼</div>
+
+        <div id="step6" style="background:#fff3e0;border:1px solid #e0953f;border-radius:8px;padding:10px 14px;">
+          <div style="font-size:13px;font-weight:700;color:#8a5a15;">6 · 装车扫码 <span style="font-size:11px;font-weight:400;background:#e0953f;color:#fff;border-radius:10px;padding:1px 8px;margin-left:4px;">P0 介入</span></div>
+          <div style="font-size:12px;color:#7a5a22;">责任人：装车员</div>
+          <div style="font-size:12px;color:#b0762f;">异常：取消单拣完仍被装车，到站才发现（f11、f44）</div>
+          <div style="font-size:12px;color:#2f6e46;background:#eef6ec;border-radius:4px;padding:2px 6px;margin-top:6px;">介入：取消订单拦截（REQ-1，f44 转人工）</div>
+        </div>
+        <div style="text-align:center;color:#7aa7d3;line-height:1;margin:4px 0;">▼</div>
+
+        <div id="step7" style="background:#fdeaea;border:1px solid #d2696a;border-radius:8px;padding:10px 14px;">
+          <div style="font-size:13px;font-weight:700;color:#8a2f2f;">7 · 配送站收货</div>
+          <div style="font-size:12px;color:#7a4444;">责任人：叶书（配送站长）</div>
+          <div style="font-size:12px;color:#9a4a4a;">异常：到站才发现错发/取消单（f11）；仓库按出库算完成 vs 配送站按正确收货算完成（f50、f53）</div>
+        </div>
+      </div>
+
+      <!-- 右：协同助手能力 + 边界 -->
+      <div style="flex:1 1 380px;min-width:280px;">
+        <div style="font-size:15px;font-weight:700;color:#123c63;margin-bottom:10px;">协同助手（warehouse-coop）介入能力</div>
+
+        <div style="background:#fff;border:1px solid #d4dde8;border-radius:8px;padding:12px 14px;margin-bottom:10px;">
+          <div style="font-size:13px;font-weight:700;color:#123c63;">数据口径校验（REQ-5）</div>
+          <div style="font-size:12px;color:#5a6b82;">主编号 / 版本 / 事件时间校验；歧义进人工修复队列，不进自动推荐样本（f33）</div>
+        </div>
+
+        <div style="background:#fff;border:1px solid #d4dde8;border-radius:8px;padding:12px 14px;margin-bottom:10px;">
+          <div style="font-size:13px;font-weight:700;color:#123c63;">取消订单拦截（REQ-1）</div>
+          <div style="font-size:12px;color:#5a6b82;">波次→装车之间检出取消单 → 拦截并转人工（f11、f44、f31）</div>
+        </div>
+
+        <div style="background:#fff;border:1px solid #d4dde8;border-radius:8px;padding:12px 14px;margin-bottom:10px;">
+          <div style="font-size:13px;font-weight:700;color:#123c63;">相似 SKU 错配提醒（REQ-2）</div>
+          <div style="font-size:12px;color:#5a6b82;">扫码解释 + 错配提醒；显示原记录与待确认字段（f10、f15、f52）</div>
+        </div>
+
+        <div style="background:#fff;border:1px solid #d4dde8;border-radius:8px;padding:12px 14px;margin-bottom:10px;">
+          <div style="font-size:13px;font-weight:700;color:#123c63;">交接清单（REQ-6）</div>
+          <div style="font-size:12px;color:#5a6b82;">业务编号 / 版本 / 状态 / 未解决事项 / 接手人；确认接手才结束待办（f23、f25）</div>
+        </div>
+
+        <div style="background:#fff;border:1px solid #d4dde8;border-radius:8px;padding:12px 14px;margin-bottom:10px;">
+          <div style="font-size:13px;font-weight:700;color:#123c63;">审计留痕（REQ-4）</div>
+          <div style="font-size:12px;color:#5a6b82;">建议 + 人工改动 + 签核人，可重建处理链（f41、f45）</div>
+        </div>
+
+        <div style="background:#fff;border:1px solid #d4dde8;border-radius:8px;padding:12px 14px;margin-bottom:10px;">
+          <div style="font-size:13px;font-weight:700;color:#123c63;">口径核算（REQ-3）</div>
+          <div style="font-size:12px;color:#5a6b82;">错发率 1.8%→0.5%；复核漏扫为零为硬门槛；口径未固定前验收不可签字（f00、f02、f42、f53）</div>
+        </div>
+
+        <!-- 边界 -->
+        <div style="background:#eef6ec;border:1px solid #6ba368;border-radius:8px;padding:12px 14px;">
+          <div style="font-size:13px;font-weight:700;color:#2f6e46;">安全边界 · 人工兜底</div>
+          <ul style="font-size:12px;color:#3c6b4a;margin:6px 0 0;padding-left:18px;">
+            <li>不自动操作叉车、不做盘盈盘亏（f05、f52）</li>
+            <li>不写入业务系统、不自动批准（f32、f41）</li>
+            <li>取消单 / 缺依据 / 版本冲突 / 系统不可用 → 转人工（f44）</li>
+            <li>波次计划员不代替安全主管专业签核（f22）</li>
+            <li>高危操作遵循现场规程（f40）</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 底部说明 -->
+    <div style="font-size:12px;color:#5a6b82;border-top:1px solid #d4dde8;margin-top:18px;padding-top:10px;">
+      验收硬线：错发率下降且复核漏扫为零；安全主管可否决上线，配送站长参与服务结果验收（f02、f42、f04）。
+      本项目为 FDE 合成业务场景训练（示意），真实接口与业务验收需另行核实。
+    </div>
+  </div>
+</div>
+</html>
