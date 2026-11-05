@@ -1,32 +1,29 @@
-# ---- Python ----
+# 运行时产物：数据库、索引缓存、日志
+data/*.db
+data/*.db-wal
+data/*.db-shm
+db/
+*.sqlite3
+prototype/data/index/
+
+# Python
 __pycache__/
 *.py[cod]
 *.egg-info/
-*.egg
-build/
-dist/
-.eggs/
 .venv/
 venv/
-env/
 
-# ---- 测试 / 覆盖率 ----
-.pytest_cache/
-.coverage
-htmlcov/
-.tox/
+# 本地配置（含 API Key，绝不入库）
+.env
+.env.local
 
-# ---- 编辑器 / 系统 ----
+# 评测/报告产物：report.json 刻意入库，作为"30/30 通过"的可复查证据
+
+# 编辑器/系统
 .vscode/
 .idea/
-*.swp
-*.swo
 .DS_Store
 Thumbs.db
 
-# ---- 密钥 / 本地配置（绝不提交） ----
-*.pem
-*.key
-*.env
-.env.*
-config/*.local.*
+# 冒烟测试上传的制度文件（跑脚本会自动删，双保险）
+data/policies/smoke_*.md
